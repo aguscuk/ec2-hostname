@@ -1,0 +1,6 @@
+---
+- hosts: "tag_DOMAIN_INTEG"
+  become: true
+
+  roles:
+    - role: change-hostname

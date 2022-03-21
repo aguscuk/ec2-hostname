@@ -1,0 +1,21 @@
+- name: display variables from dynamic inventory
+  vars:
+      myVar: |
+        Name: {{ tags.Name }} 
+        Instance Id: {{ instance_id }} 
+        Private Ip: {{ private_ip_address }}
+        Tags: {{ tags }}
+  debug: 
+    msg: "{{ myVar.split('\n') }}"
+
+
+- name: Set hostname
+  hostname:
+    name: "{{ tags.hostname }}_{{ private_ip_address }}"
+  become: yes
+  tags: runcmd
+  register: result
+
+- name: Print output
+  debug:
+    var: result
